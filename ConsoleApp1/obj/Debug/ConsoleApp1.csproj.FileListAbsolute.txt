@@ -30,3 +30,11 @@ C:\Users\paolo\Downloads\CALCOLA TOTALE ALUNNI - v05\ConsoleApp1\obj\Debug\Conso
 C:\Users\paolo\Downloads\CALCOLA TOTALE ALUNNI - v05\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
 C:\Users\paolo\Downloads\CALCOLA TOTALE ALUNNI - v05\ConsoleApp1\obj\Debug\ConsoleApp1.exe
 C:\Users\paolo\Downloads\CALCOLA TOTALE ALUNNI - v05\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.AssemblyReference.cache
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.SuggestedBindingRedirects.cache
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\LENOVO M700\PROGRAMMAZIONE IN WINDOWS\C #\PROGETTI PERSONALI IN C#\CalcolaTotaleAlunni\ConsoleApp1\bin\Debug\ConsoleApp1.pdb

@@ -81,6 +81,14 @@ namespace ConsoleApp1
             {
                 listaClassi.Add(classe.Substring(37, 9));
             }
+
+            // Stampo la lista delle classi per un controllo
+            //foreach (string classe in listaClassi)
+            //{
+            //    Console.WriteLine(classe);
+            //}
+
+            Console.WriteLine(ControllaFogli(listaFiles));
             
             Console.WriteLine("Ecco i files presenti nella cartella MENSA_DIGITALE dopo la conversione del formato:\n\n");
             foreach (string file in files)
@@ -105,11 +113,12 @@ namespace ConsoleApp1
             Console.Beep();
             Console.Clear();
 
-            if ((listaFiles.Count == 13) && (ControllaFogli(listaFiles)))
+            if (ControllaFogli(listaFiles))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Nella cartella MENSA_DIGITALE sono presenti {listaFiles.Count} files");
                 Console.WriteLine("Tutte le classi hanno salvato il foglio mensa digitale!");
+
                 isCheckOk = true;
             }
             else if (listaFiles.Count < 13)
@@ -125,27 +134,25 @@ namespace ConsoleApp1
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\n\nNella cartella MENSA_DIGITALE sono presenti {listaFiles.Count} files.");
                 Console.WriteLine($"Attenzione, in qualche classe hanno salvato il foglio mensa digitale più volte!");
-                Console.WriteLine("\n\nNon posso procedere nel calcolo del totale degli alunni che si fermano a mensa.");
+                Console.WriteLine("\nNon posso procedere nel calcolo del totale degli alunni che si fermano a mensa.");
                 isCheckOk = false;
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\n\nNella cartella MENSA_DIGITALE sono presenti {listaFiles.Count} files.");
-                Console.WriteLine($"E' possibile che una classe abbia salvato più volte il foglio mensa e qualche classe non lo abbia salvato.");
-                Console.WriteLine("\n\nNon posso procedere nel calcolo del totale degli alunni che si fermano a mensa.");
+                Console.WriteLine($"Nella cartella MENSA_DIGITALE sono presenti {listaFiles.Count} files.");
+                Console.WriteLine($"\nE' possibile, però, che una classe abbia salvato più volte il foglio mensa, " +
+                    $"\n\nmentre qualche altra classe non lo abbia salvato.");
+                Console.WriteLine("\nNon posso procedere con il calcolo del totale degli alunni che si fermano a mensa.");
                 isCheckOk = false;
-
             }
 
             // Calcolo il totale degli alunni che si fermano a pranzo
             if (isCheckOk)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
                 // Riscrivo la data
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"\nOggi è {giorniSettimana[int.Parse(giorno) - 1]}, {giornoDelMese}/{Mese}/{anno}.");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 
                 Console.WriteLine("\nEcco il totale degli alunni che si fermano a pranzo oggi in base ai files salvati:\n");
                 List<int> listaNumeri = new List<int>();
@@ -179,98 +186,218 @@ namespace ConsoleApp1
 
 
                 Console.WriteLine("                          ---");
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine($"TOTALE: {totale, 21}");  // il numero dopo la virgola allinea a destra dopo 50 spazi
                 Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"TOTALE: {totale, 21}");  // il numero dopo la virgola allinea a destra dopo 50 spazi
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
 
                 // Calcolo i vari totali degli alunni a seconda del giorno della settimana
                 int giornoDaControllare = int.Parse(giorno);
-                giornoDaControllare = 3;
-                if (giornoDaControllare == 3)
+                giornoDaControllare = 1;
+
+                switch (giornoDaControllare)
                 {
-                    Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
-                    Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
-                    Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
-                    Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1] + listaNumeri[3], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    case 1:
+                        Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
+                        Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
+                        Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
+                        Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1] + listaNumeri[2], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
-                    Console.WriteLine($"{listaClassi[8]}{listaNumeri[9], 20}");
-                    Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[8] + listaNumeri[9], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
+                        Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
+                        Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[4] + listaNumeri[5], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nSALONE - primo turno");
-                    Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
-                    Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[5] + listaNumeri[2], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nSALONE - primo turno");
+                        Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
+                        Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[3] + listaNumeri[6], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nSALONE - secondo turno");
-                    Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
-                    Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
-                    Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[4] + listaNumeri[6] + listaNumeri[7], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nSALONE - secondo turno");
+                        Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
+                        Console.WriteLine($"{listaClassi[8]}{listaNumeri[8], 20}");
+                        Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[7] + listaNumeri[8] + listaNumeri[9], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nNELLE CLASSI");
-                    Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
-                    Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
-                    Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nNELLE CLASSI");
+                        Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
+                        Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
+                        Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        break;
+                    case 2:
+                        Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
+                        Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
+                        Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                }
-                else if (giornoDaControllare == 4)
-                {
-                    Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
-                    Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
-                    Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
+                        Console.WriteLine($"{listaClassi[8]}{listaNumeri[8], 20}");
+                        Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[8] + listaNumeri[9], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
-                    Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
-                    Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[6] + listaNumeri[7], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nSALONE - primo turno");
+                        Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
+                        Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
+                        Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
+                        Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[2] + listaNumeri[3] + listaNumeri[4] + listaNumeri[5], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nSALONE - primo turno");
-                    Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
-                    Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
-                    Console.WriteLine($"{listaClassi[8]}{listaNumeri[8], 20}");
-                    Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[2] + listaNumeri[3] + listaNumeri[8] + listaNumeri[9], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nSALONE - secondo turno");
+                        Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
+                        Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
+                        Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
+                        Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
+                        Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[6] + listaNumeri[7] + listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        break;
+                    case 3:
+                        Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
+                        Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
+                        Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
+                        Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1] + listaNumeri[3], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-                    Console.WriteLine("\n\nSALONE - secondo turno");
-                    Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
-                    Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
-                    Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
-                    Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
-                    Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
-                    Console.WriteLine($"                          ---");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"TOTALE: {listaNumeri[4] + listaNumeri[5] + listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
+                        Console.WriteLine($"{listaClassi[8]}{listaNumeri[9], 20}");
+                        Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[8] + listaNumeri[9], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
+                        Console.WriteLine("\n\nSALONE - primo turno");
+                        Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
+                        Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[5] + listaNumeri[2], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nSALONE - secondo turno");
+                        Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
+                        Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
+                        Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[4] + listaNumeri[6] + listaNumeri[7], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nNELLE CLASSI");
+                        Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
+                        Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
+                        Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        break;
+                    case 4:
+                        Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
+                        Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
+                        Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
+                        Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
+                        Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[6] + listaNumeri[7], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nSALONE - primo turno");
+                        Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
+                        Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
+                        Console.WriteLine($"{listaClassi[8]}{listaNumeri[8], 20}");
+                        Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[2] + listaNumeri[3] + listaNumeri[8] + listaNumeri[9], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nSALONE - secondo turno");
+                        Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
+                        Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
+                        Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
+                        Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
+                        Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[4] + listaNumeri[5] + listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        break;
+                    case 5:
+                        Console.WriteLine("\n\nMENSA PICCOLA - primo turno");
+                        Console.WriteLine($"{listaClassi[0]}{listaNumeri[0], 20}");
+                        Console.WriteLine($"{listaClassi[1]}{listaNumeri[1], 20}");
+                        Console.WriteLine($"{listaClassi[2]}{listaNumeri[2], 20}");
+                        Console.WriteLine($"{listaClassi[3]}{listaNumeri[3], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[0] + listaNumeri[1] + listaNumeri[2] + listaNumeri[3], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nMENSA PICCOLA - secondo turno");
+                        Console.WriteLine($"{listaClassi[6]}{listaNumeri[6], 20}");
+                        Console.WriteLine($"{listaClassi[7]}{listaNumeri[7], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[6] + listaNumeri[7], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nSALONE - primo turno");
+                        Console.WriteLine($"{listaClassi[4]}{listaNumeri[4], 20}");
+                        Console.WriteLine($"{listaClassi[5]}{listaNumeri[5], 20}");
+                        Console.WriteLine($"{listaClassi[10]}{listaNumeri[10], 20}");
+                        Console.WriteLine($"{listaClassi[11]}{listaNumeri[11], 20}");
+                        Console.WriteLine($"{listaClassi[12]}{listaNumeri[12], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[5] + listaNumeri[2] + listaNumeri[8] + listaNumeri[9] + listaNumeri[10] + listaNumeri[11] + listaNumeri[12], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                        Console.WriteLine("\n\nSALONE - secondo turno");
+                        Console.WriteLine($"{listaClassi[8]}{listaNumeri[8], 20}");
+                        Console.WriteLine($"{listaClassi[9]}{listaNumeri[9], 20}");
+                        Console.WriteLine($"                          ---");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"TOTALE: {listaNumeri[8] + listaNumeri[9], 21}");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        break;
 
                 }
 
@@ -280,11 +407,11 @@ namespace ConsoleApp1
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n\nRiprovare in un secondo momento quando tutti i files saranno stati salvati.");
+                Console.WriteLine("\nRiprovare in un secondo momento quando i files saranno stati salvati correttamente.");
             }
 
             // Per evitare che si chiuda la finestra del terminale
-            Console.WriteLine("\nPremere il tasto Invio per chiudere il programma");
+            Console.WriteLine("\n\nPremere il tasto Invio per chiudere il programma");
             Console.ReadLine();
         }
 
@@ -306,67 +433,68 @@ namespace ConsoleApp1
             // dire che tutte le classi hanno salvato il foglio
             int counter = 0;
             // Controllo che tutte le classi abbiano salvato il file
-            if (lista[0].Substring(37, 9) == "Classe 1A")
+            if (lista.Count == 13)
             {
-                counter++;                
-            }
-            if (lista[1].Substring(37, 9) == "Classe 1B")
-            {
-                counter++;                
-            }
-            if (lista[2].Substring(37, 9) == "Classe 2A")
-            {
-                counter++;                
-            }
-            if (lista[3].Substring(37, 9) == "Classe 2B")
-            {
-                counter++;                
-            }
-            if (lista[4].Substring(37, 9) == "Classe 3A")
-            {
-                counter++;                
-            }
-            if (lista[5].Substring(37, 9) == "Classe 3B")
-            {
-                counter++;                
-            }
-            if (lista[6].Substring(37, 9) == "Classe 4A")
-            {
-                counter++;                
-            }
-            if (lista[7].Substring(37, 9) == "Classe 4B")
-            {
-                counter++;                
-            }
-            if (lista[8].Substring(37, 9) == "Classe 5A")
-            {
-                counter++;                
-            }
-            if (lista[9].Substring(37, 9) == "Classe 5B")
-            {
-                counter++;                
-            }
-            if (lista[10].Substring(37, 9) == "Classe M1")
-            {
-                counter++;                
-            }
-            if (lista[11].Substring(37, 9) == "Classe M2")
-            {
-                counter++;                
-            }
-            if (lista[12].Substring(37, 9) == "Classe M3")
-            {
-                counter++;                
-            }
-            if (lista[0].Substring(37, 9) == "Classe 1A")
-            {
-                counter++;                
+
+                if (lista[0].Substring(37, 9) == "Classe 1A")
+                {
+                    counter++;
+                }
+                if (lista[1].Substring(37, 9) == "Classe 1B")
+                {
+                    counter++;
+                }
+                if (lista[2].Substring(37, 9) == "Classe 2A")
+                {
+                    counter++;
+                }
+                if (lista[3].Substring(37, 9) == "Classe 2B")
+                {
+                    counter++;
+                }
+                if (lista[4].Substring(37, 9) == "Classe 3A")
+                {
+                    counter++;
+                }
+                if (lista[5].Substring(37, 9) == "Classe 3B")
+                {
+                    counter++;
+                }
+                if (lista[6].Substring(37, 9) == "Classe 4A")
+                {
+                    counter++;
+                }
+                if (lista[7].Substring(37, 9) == "Classe 4B")
+                {
+                    counter++;
+                }
+                if (lista[8].Substring(37, 9) == "Classe 5A")
+                {
+                    counter++;
+                }
+                if (lista[9].Substring(37, 9) == "Classe 5B")
+                {
+                    counter++;
+                }
+                if (lista[10].Substring(37, 9) == "Classe M1")
+                {
+                    counter++;
+                }
+                if (lista[11].Substring(37, 9) == "Classe M2")
+                {
+                    counter++;
+                }
+                if (lista[12].Substring(37, 9) == "Classe M3")
+                {
+                    counter++;
+                }
+
+                if (counter == 13)
+                {
+                    risultatoControllo = true;
+                }
             }
             
-            if (counter == 13)
-            {
-                risultatoControllo = true;
-            }
 
             return risultatoControllo;
         }
